@@ -1,0 +1,20 @@
+{
+    "name": "nicolas/ddd",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "NicolasRz",
+            "email": "nicolasruiz.pro@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "symfony/var-dumper": "^7.2"
+    },
+    "require": {
+        "ramsey/uuid": "^4.7"
+    }
+}

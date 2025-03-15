@@ -1,0 +1,18 @@
+{
+    "b761d3ff-9aa2-4cd8-a1d7-63d1cdb380f6": {
+        "id": "b761d3ff-9aa2-4cd8-a1d7-63d1cdb380f6",
+        "username": "admin",
+        "password": "$2y$10$kA7ST9SoTdZhKdjg0B4DzOURkTrLRKEGQg0L8McaomUG3UypQGspa",
+        "roles": [
+            "ADMIN"
+        ]
+    },
+    "08e6d416-700c-4730-b500-5599abc90c91": {
+        "id": "08e6d416-700c-4730-b500-5599abc90c91",
+        "username": "a",
+        "password": "$2y$10$d7JABFCx6Agxd3tgdDNnvegvUAGLhr38q5ajDfB6BXkxac0LIcnYO",
+        "roles": [
+            "USER"
+        ]
+    }
+}

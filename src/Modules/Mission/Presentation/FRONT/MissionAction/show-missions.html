@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des Missions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .missions-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .missions-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .missions-table th,
+        .missions-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        .missions-table th {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        .missions-table tr:hover {
+            background-color: #f5f5f5;
+        }
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .status-active {
+            background: #e3fcef;
+            color: #00864e;
+        }
+        .status-pending {
+            background: #fff4e5;
+            color: #995500;
+        }
+        .status-completed {
+            background: #e8eaed;
+            color: #4d4d4d;
+        }
+        .action-button {
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9em;
+            color: white;
+            background: #007bff;
+        }
+        .action-button:hover {
+            background: #0056b3;
+        }
+        @media (max-width: 768px) {
+            .missions-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="missions-container">
+        <h1>Liste des Missions</h1>
+        <?php if($output['currentUser']->isAdmin()) : ?>
+            Vous êtes admin
+        <?php endif;?>
+        <?= "Bonjour " .  $output['currentUser']->getUsername() ;?>
+
+        <table class="missions-table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Date de début</th>
+                    <th>Date de fin</th>
+                    <th>Capacité max</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($output['missions'] as $mission): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($mission['nom']) ?></td>
+                        <td><?= htmlspecialchars($mission['dateDeDebut']) ?></td>
+                        <td><?= htmlspecialchars($mission['dateDeFin']) ?></td>
+                        <td><?= htmlspecialchars($mission['capacite']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
