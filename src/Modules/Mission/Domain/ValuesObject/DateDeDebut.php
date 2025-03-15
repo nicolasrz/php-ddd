@@ -6,9 +6,9 @@ use DateTime;
 
 class DateDeDebut
 {
-    private DateTime $value;
+    private \DateTimeInterface $value;
 
-    public function __construct(DateTime $value) {
+    public function __construct(\DateTimeImmutable $value) {
         $today = new DateTime();
         $today->setTime(0, 0, 0);
 
@@ -19,7 +19,7 @@ class DateDeDebut
         $this->value = $value;
     }
 
-    public function getValue(): DateTime {
+    public function getValue(): \DateTimeInterface {
         return $this->value;
     }
 }
