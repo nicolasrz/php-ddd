@@ -17,6 +17,9 @@ use App\Shared\Auth\Domain\Repository\AuthUserRepositoryInterface;
 use App\Shared\Auth\Domain\Service\SessionManagerInterface;
 use App\Shared\Auth\Infrastructure\Repository\InFileMemoryAuthUserRepository;
 use App\Shared\Auth\Infrastructure\Service\PhpSessionManager;
+use App\Modules\Mission\Infrastructure\Policy\MissionPolicy;
+use App\Core\Security\SecurityMiddleware;
+use App\Modules\Auth\Presentation\FRONT\LogoutAction\LogoutAction;
 
 class Container implements ContainerInterface
 {
@@ -49,6 +52,18 @@ class Container implements ContainerInterface
         $this->factories[SessionManagerInterface::class] = fn() => new PhpSessionManager();
         $this->factories[AuthUserRepositoryInterface::class] = fn() => new InFileMemoryAuthUserRepository();
         $this->factories[MissionRepositoryInterface::class] = fn() => new InMemoryMissionRepository();
+
+        // Securité
+        $this->factories[SecurityMiddleware::class] = function (Container $container) {
+            return new SecurityMiddleware(
+                $container->get(SessionManagerInterface::class)
+            );
+        };
+        
+        // Policies 
+        $this->factories[MissionPolicy::class] = function (Container $container) {
+            return new MissionPolicy();
+        };      
 
         // Enregistrement des services applicatifs
         $this->factories[AuthenticationService::class] = function (Container $container) {
@@ -84,6 +99,11 @@ class Container implements ContainerInterface
                 $container->get(ConnecteUtilisateurUseCase::class)
             );
         };
+        $this->factories[LogoutAction::class] = function (Container $container) {
+            return new LogoutAction(
+                $container->get(SessionManagerInterface::class)
+            );
+        };
         $this->factories[RegisterAction::class] = function (Container $container) {
             return new RegisterAction(
                 $container->get(EnregisterUnUseUseCase::class)
@@ -93,7 +113,8 @@ class Container implements ContainerInterface
         $this->factories[ListMissionAction::class] = function (Container $container) {
             return new ListMissionAction(
                 $container->get(SessionManagerInterface::class),
-                $container->get(ListMissionUseCase::class)
+                $container->get(ListMissionUseCase::class),
+                $container->get(MissionPolicy::class)   
             );
         };
     }

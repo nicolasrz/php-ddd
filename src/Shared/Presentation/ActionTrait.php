@@ -20,4 +20,11 @@ trait ActionTrait
         echo '404 - Page non trouvée';
         exit;
     }
+
+    public function throwForbiddenException(): void
+    {
+        header('HTTP/1.0 403 Forbidden');
+        echo '403 - Accès refusé';
+        exit;
+    }
 }

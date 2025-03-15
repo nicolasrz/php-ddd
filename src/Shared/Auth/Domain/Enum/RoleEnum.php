@@ -2,8 +2,8 @@
 
 namespace App\Shared\Auth\Domain\Enum;
 
-enum RoleEnum
+enum RoleEnum: string
 {
-    case ADMIN;
-    case USER;
+    case ADMIN = 'ADMIN';
+    case USER = 'USER';
 }

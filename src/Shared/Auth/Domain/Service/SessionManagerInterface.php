@@ -2,6 +2,7 @@
 
 namespace App\Shared\Auth\Domain\Service;
 
+
 use App\Shared\Auth\Domain\Entity\User;
 
 interface SessionManagerInterface

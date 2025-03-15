@@ -27,7 +27,7 @@ class InFileMemoryAuthUserRepository implements AuthUserRepositoryInterface
                         Uuid::fromString($userData['id']),
                         $userData['username'],
                         $userData['password'],
-                        [RoleEnum::ADMIN]
+                        array_map(fn(string $role) => RoleEnum::tryFrom($role), array_filter($userData['roles']))
                     );
                 }
             }
@@ -43,7 +43,7 @@ class InFileMemoryAuthUserRepository implements AuthUserRepositoryInterface
         $this->users[$adminId] = new User(Uuid::fromString($adminId),
             'admin',
             '$2y$10$kA7ST9SoTdZhKdjg0B4DzOURkTrLRKEGQg0L8McaomUG3UypQGspa', // Password123
-                    [RoleEnum::ADMIN]
+                [RoleEnum::ADMIN, RoleEnum::USER]
         );
         $this->saveToFile();
     }
@@ -54,7 +54,7 @@ class InFileMemoryAuthUserRepository implements AuthUserRepositoryInterface
             'id' => $user->getId(),
             'username' => $user->getUsername(),
             'password' => $user->getPassword(),
-            'roles' => array_map(fn(RoleEnum $role) => $role->name, $user->getRoles()), // 🔹 Sauvegarde les rôles
+            'roles' => array_map(fn(RoleEnum $role) => $role->value, $user->getRoles()),
         ], $this->users);
 
         file_put_contents($this->file, json_encode($data, JSON_PRETTY_PRINT));

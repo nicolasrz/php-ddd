@@ -8,6 +8,7 @@ class Router
 {
     private const ROUTES = [
         '/login' => 'App\Modules\Auth\Presentation\FRONT\LoginAction\LoginAction',
+        '/logout' => 'App\Modules\Auth\Presentation\FRONT\LogoutAction\LogoutAction',
         '/register' => 'App\Modules\Auth\Presentation\FRONT\RegisterAction\RegisterAction',
         '/missions' => 'App\Modules\Mission\Presentation\FRONT\MissionAction\ListMissionAction'
     ];

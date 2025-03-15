@@ -2,8 +2,8 @@
 
 namespace App\Shared\Auth\Infrastructure\Service;
 
-use App\Shared\Auth\Domain\Entity\User;
 use App\Shared\Auth\Domain\Service\SessionManagerInterface;
+use App\Shared\Auth\Domain\Entity\User;
 
 class PhpSessionManager implements SessionManagerInterface
 {
