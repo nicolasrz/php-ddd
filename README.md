@@ -19,3 +19,9 @@ composer dump-autoload
 - /login (admin/Password123)
 - /logout
 - /missions (can only list missions)
+
+# Run tests
+```
+cd /php-ddd. 
+vendor/bin/phpunit tests
+```
